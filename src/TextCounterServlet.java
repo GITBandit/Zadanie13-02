@@ -19,10 +19,9 @@ public class TextCounterServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
 
-        writer.println(readString);
 
 
-        int stringCharacters = readString.length();
+        int stringCharacters = readString.length();          //tablica - na potrzeby liczenia słów
         String[] strTable = readString.split(" ");
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -32,16 +31,14 @@ public class TextCounterServlet extends HttpServlet {
             stringBuilder.append(s);
         }
 
-        String stringTrimCharacters = stringBuilder.toString();
-        int trimmedStringCharacters = stringTrimCharacters.length();
+        String stringTrimCharacters = stringBuilder.toString();  //  string z tablicy
+        int trimmedStringCharacters = stringTrimCharacters.length();   //licznik znaków bez spacji
 
         int counter = 0;
         for (String s : strTable) {
             counter++;
         }
 
-        writer.println(stringCharacters);
-        writer.println(" "+ stringTrimCharacters + "długośc " + trimmedStringCharacters +  " ilosc wyr " + counter);
 
 
         StringBuilder stringBuilder2 = new StringBuilder();
@@ -50,9 +47,14 @@ public class TextCounterServlet extends HttpServlet {
             stringBuilder2.append(s);
         }
         String reversedString =  stringBuilder2.reverse().toString();
-        writer.println(reversedString);
 
         boolean ifPalindrome = readString.equals(reversedString);
-        writer.println(ifPalindrome);
+
+
+        writer.println("<HTML><p><i>" + readString + "</i></p>");
+        writer.println("<p> Ilość słów: " + counter + "</p>" +
+                        "<p> Ilość znaków : " +  stringCharacters + "</p>" +
+                "<p> Ilość znaków bez spacji : " + trimmedStringCharacters + "</p>" +
+                "<p> Palindrom : " + ifPalindrome + "</p></HTML>" );
     }
 }
