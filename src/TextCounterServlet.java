@@ -14,6 +14,7 @@ public class TextCounterServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html");
 
         String readString = req.getParameter("someText");
 
