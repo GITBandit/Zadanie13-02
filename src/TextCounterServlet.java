@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 public class TextCounterServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
@@ -23,39 +23,27 @@ public class TextCounterServlet extends HttpServlet {
 
 
         int stringCharacters = readString.length();          //tablica - na potrzeby liczenia słów
+        int charactersWithoutSpaces = readString.replace(" ","").length();
+
         String[] strTable = readString.split(" ");
 
+        int numberOfWords = strTable.length;
+
+
         StringBuilder stringBuilder = new StringBuilder();
-
-        for (String s : strTable) {
-
-            stringBuilder.append(s);
-        }
-
-        String stringTrimCharacters = stringBuilder.toString();  //  string z tablicy
-        int trimmedStringCharacters = stringTrimCharacters.length();   //licznik znaków bez spacji
-
-        int counter = 0;
-        for (String s : strTable) {
-            counter++;
-        }
-
-
-
-        StringBuilder stringBuilder2 = new StringBuilder();
         String[] strTable2 = readString.split("");
         for (String s : strTable2) {
-            stringBuilder2.append(s);
+            stringBuilder.append(s);
         }
-        String reversedString =  stringBuilder2.reverse().toString();
+        String reversedString =  stringBuilder.reverse().toString();
 
         boolean ifPalindrome = readString.equals(reversedString);
 
 
         writer.println("<HTML><p><i>" + readString + "</i></p>");
-        writer.println("<p> Ilość słów: " + counter + "</p>" +
+        writer.println("<p> Ilość słów: " + numberOfWords + "</p>" +
                         "<p> Ilość znaków : " +  stringCharacters + "</p>" +
-                "<p> Ilość znaków bez spacji : " + trimmedStringCharacters + "</p>" +
+                "<p> Ilość znaków bez spacji : " + charactersWithoutSpaces + "</p>" +
                 "<p> Palindrom : " + ifPalindrome + "</p></HTML>" );
     }
 }
